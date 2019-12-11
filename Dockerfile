@@ -1,17 +1,20 @@
 FROM alpine
 # official kubectl install instructions from: https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl-on-linux
-# Download the latest release with the command
-# RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
+# official documentation uses CURL. Alpine does not have CURL but wget.
+# -----------------------------------------------------------------------
+#  todo Antonio: use latest version and tag the image with this version number
+#  RUN wget https://storage.googleapis.com/kubernetes-release/release/stable.txt
+# -----------------------------------------------------------------------
+# Download release 1.16.3
 RUN wget https://storage.googleapis.com/kubernetes-release/release/v1.16.3/bin/linux/amd64/kubectl
 # Make the kubectl binary executable.
 RUN chmod +x ./kubectl
 # Move the binary in to your PATH
 RUN mv ./kubectl /usr/local/bin/kubectl
+# RUN kubeadmin init
 # Test to ensure the version you installed is up-to-date
-RUN kubectl version
-
-#
-#-L, --location
-#              (HTTP)  If  the  server  reports  that  the requested page has moved to a different location (i
-# -O, --remote-name
-#              (Only  the file part of the remote file is used, the path is cut
+# -----------------------------------------------------------------------
+#  todo Stefan: how to create a dummy ~/.kube/config file so that the command
+#  below does not throw an error (_The connection to the server localhost:8080 was refused - did you specify the right host or port?_)
+# RUN kubectl version
+# -----------------------------------------------------------------------
