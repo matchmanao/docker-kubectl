@@ -1,4 +1,4 @@
-FROM alpine
+FROM alpine:3.18.3
 # official kubectl install instructions from: https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl-on-linux
 # official documentation uses CURL. Alpine does not have CURL but wget.
 # -----------------------------------------------------------------------
